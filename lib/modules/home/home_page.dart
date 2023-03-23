@@ -41,6 +41,12 @@ class HomePage extends StatelessWidget {
                 },
                 icon: Icon(Icons.people),
                 label: Text('Listar projetos')),
+            OutlinedButton.icon(
+                onPressed: () {
+                  Modular.to.pushNamed('/cadastro/requisito');
+                },
+                icon: Icon(Icons.people),
+                label: Text('Cadastrar Requisito')),
           ],
         ),
       ),

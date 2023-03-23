@@ -1,5 +1,6 @@
 import 'package:brasil_fields/brasil_fields.dart';
 import 'package:email_validator/email_validator.dart';
+import 'package:versionamentorequisitos/Models/pessoa.dart';
 
 class AppValidator {
   String? requiredValidator(String? campo) {
@@ -8,6 +9,38 @@ class AppValidator {
     } else {
       return null;
     }
+  }
+
+  String? requiredValidatorDropDown(String? campo) {
+    if (campo == null) {
+      return 'Campo requerido!';
+    } else {
+      return null;
+    }
+  }
+
+  String? requiredComplexidade(String? campo) {
+    if (campo == null) {
+      return 'Campo requerido!';
+    } else {
+      return null;
+    }
+  }
+
+  String? requiredResponsavel(Pessoa? pessoa) {
+    if (pessoa == null) {
+      return 'Selecione o responsável!';
+    } else {
+      return null;
+    }
+  }
+
+  String? requiredDate(DateTime? data) {
+    if ((data.toString().isEmpty) ||
+        (DateTime.tryParse(data.toString()) == null)) {
+      return 'Selecione o prazo!';
+    }
+    return null;
   }
 
   String? cpfValidator(String? cpf) {

@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:versionamentorequisitos/modules/listagem/controller/listagem_controller.dart';
 
@@ -24,32 +25,41 @@ class _ListagemPessoasPageState extends State<ListagemPessoasPage> {
   }
 
   Future refreshItens() async {
-    setState(() {
-      isLoading = true;
-    });
+    listagemController.isLoading = true;
     await listagemController.getPessoas();
-    setState(() {
-      isLoading = false;
-    });
+    listagemController.isLoading = false;
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(),
-        body: isLoading
-            ? Center(child: CircularProgressIndicator())
-            : listagemController.listPessoas.isEmpty
-                ? Center(
-                    child: Text('Nenhum pessoa cadastrada!'),
-                  )
-                : ListView.separated(
-                    itemBuilder: (context, index) {
-                      return ListTile(
-                        title: Text(listagemController.listPessoas[index].nome),
-                      );
-                    },
-                    separatorBuilder: (context, index) => Divider(),
-                    itemCount: listagemController.listPessoas.length));
+    return Observer(builder: (context) {
+      return Scaffold(
+          floatingActionButton: FloatingActionButton(
+            onPressed: () => Modular.to.pushNamed('/cadastro/pessoa'),
+            child: Icon(Icons.add),
+          ),
+          appBar: AppBar(
+            title: Text('Pessoas'),
+          ),
+          body: isLoading
+              ? Center(child: CircularProgressIndicator())
+              : listagemController.listPessoas.isEmpty
+                  ? Center(
+                      child: Text('Nenhum pessoa cadastrada!'),
+                    )
+                  : ListView.separated(
+                      itemBuilder: (context, index) {
+                        return ListTile(
+                          trailing: Text(
+                              listagemController.listPessoas[index].funcao),
+                          subtitle:
+                              Text(listagemController.listPessoas[index].email),
+                          title:
+                              Text(listagemController.listPessoas[index].nome),
+                        );
+                      },
+                      separatorBuilder: (context, index) => Divider(),
+                      itemCount: listagemController.listPessoas.length));
+    });
   }
 }

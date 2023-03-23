@@ -16,18 +16,19 @@ class CustomTextField extends StatelessWidget {
   final TextInputType? keyboardType;
   final List<TextInputFormatter>? inputFormatters;
   final String? Function(String?)? validator;
-  const CustomTextField(
-      {Key? key,
-      required this.controller,
-      this.initialValue,
-      required this.hint,
-      this.obscure,
-      this.onChanged,
-      required this.label,
-      this.keyboardType,
-      this.inputFormatters,
-      this.validator})
-      : super(key: key);
+
+  const CustomTextField({
+    Key? key,
+    required this.controller,
+    this.initialValue,
+    required this.hint,
+    this.obscure,
+    this.onChanged,
+    required this.label,
+    this.keyboardType,
+    this.inputFormatters,
+    this.validator,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +46,7 @@ class CustomTextField extends StatelessWidget {
             OutlineInputBorder(borderSide: BorderSide(color: Colors.red)),
         errorBorder:
             OutlineInputBorder(borderSide: BorderSide(color: Colors.red)),
-        contentPadding: const EdgeInsets.only(left: 8, right: 8),
+        contentPadding: const EdgeInsets.only(left: 8, right: 8, top: 5),
         focusedBorder: OutlineInputBorder(
             borderSide: BorderSide(color: Colors.blue.shade300)),
         border: const OutlineInputBorder(),

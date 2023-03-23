@@ -45,6 +45,7 @@ dependencies:
   reactive_forms: ^14.2.0
   email_validator: ^2.1.17
   brasil_fields: ^1.11.0
+  datetime_picker_formfield: ^2.0.1
 
 dev_dependencies:
   flutter_test:

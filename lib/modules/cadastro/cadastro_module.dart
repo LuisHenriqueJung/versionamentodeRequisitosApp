@@ -17,7 +17,7 @@ class CadastroModule extends Module {
   List<ModularRoute> get routes => [
         ChildRoute(
           '/requisito',
-          child: (context, args) => const CadastroRequisitoPage(),
+          child: (context, args) => CadastroRequisitoPage(projetoId: args.data),
         ),
         ChildRoute(
           '/projeto',

@@ -61,8 +61,8 @@ class DbConection {
     ${RequisitosFields.tipo} $textType,
     ${RequisitosFields.dataCadastro} $textType,
     ${RequisitosFields.tempoEstimadoEmDias} $textType,
-    ${RequisitosFields.projetoId} $numberType,
-    ${RequisitosFields.responsavelId} $numberType
+    ${RequisitosFields.projetoId} $numberType
+
     )''');
   }
 
@@ -170,18 +170,22 @@ class DbConection {
     return requisito.copyWith(id: id);
   }
 
-  Future<Requisito> readRequisito(int id) async {
+  Future<List<Requisito>> readRequisitoByProjeto(int id) async {
+    List<Requisito> listRequisitos = [];
     final db = await instance.database;
     final maps = await db.query(
       RequisitosFields.tabelaRequisito,
       columns: RequisitosFields.values,
-      where: '${RequisitosFields.id} = ?',
+      where: '${RequisitosFields.projetoId} = ?',
       whereArgs: [id],
     );
     if (maps.isNotEmpty) {
-      return Requisito.fromMap(maps.first);
+      for (var element in maps) {
+        listRequisitos.add(Requisito.fromMap(element));
+      }
+      return listRequisitos;
     } else {
-      throw Exception('Id $id não encontrado');
+      return listRequisitos;
     }
   }
 

@@ -185,19 +185,52 @@ mixin _$CadastroController on CadastroControllerBase, Store {
     });
   }
 
-  late final _$listPessoasAtom =
-      Atom(name: 'CadastroControllerBase.listPessoas', context: context);
+  late final _$listPessoasResponsaveisAtom = Atom(
+      name: 'CadastroControllerBase.listPessoasResponsaveis', context: context);
 
   @override
-  ObservableList<Pessoa> get listPessoas {
-    _$listPessoasAtom.reportRead();
-    return super.listPessoas;
+  ObservableList<Pessoa> get listPessoasResponsaveis {
+    _$listPessoasResponsaveisAtom.reportRead();
+    return super.listPessoasResponsaveis;
   }
 
   @override
-  set listPessoas(ObservableList<Pessoa> value) {
-    _$listPessoasAtom.reportWrite(value, super.listPessoas, () {
-      super.listPessoas = value;
+  set listPessoasResponsaveis(ObservableList<Pessoa> value) {
+    _$listPessoasResponsaveisAtom
+        .reportWrite(value, super.listPessoasResponsaveis, () {
+      super.listPessoasResponsaveis = value;
+    });
+  }
+
+  late final _$isLoadingAtom =
+      Atom(name: 'CadastroControllerBase.isLoading', context: context);
+
+  @override
+  bool get isLoading {
+    _$isLoadingAtom.reportRead();
+    return super.isLoading;
+  }
+
+  @override
+  set isLoading(bool value) {
+    _$isLoadingAtom.reportWrite(value, super.isLoading, () {
+      super.isLoading = value;
+    });
+  }
+
+  late final _$responsavelIdAtom =
+      Atom(name: 'CadastroControllerBase.responsavelId', context: context);
+
+  @override
+  int get responsavelId {
+    _$responsavelIdAtom.reportRead();
+    return super.responsavelId;
+  }
+
+  @override
+  set responsavelId(int value) {
+    _$responsavelIdAtom.reportWrite(value, super.responsavelId, () {
+      super.responsavelId = value;
     });
   }
 
@@ -209,12 +242,47 @@ mixin _$CadastroController on CadastroControllerBase, Store {
     return _$cadastrarProjetoAsyncAction.run(() => super.cadastrarProjeto());
   }
 
+  late final _$setPossiveisResponsaveisAsyncAction = AsyncAction(
+      'CadastroControllerBase.setPossiveisResponsaveis',
+      context: context);
+
+  @override
+  Future<dynamic> setPossiveisResponsaveis() {
+    return _$setPossiveisResponsaveisAsyncAction
+        .run(() => super.setPossiveisResponsaveis());
+  }
+
   late final _$cadastrarPessoaAsyncAction =
       AsyncAction('CadastroControllerBase.cadastrarPessoa', context: context);
 
   @override
   Future<dynamic> cadastrarPessoa() {
     return _$cadastrarPessoaAsyncAction.run(() => super.cadastrarPessoa());
+  }
+
+  late final _$CadastroControllerBaseActionController =
+      ActionController(name: 'CadastroControllerBase', context: context);
+
+  @override
+  dynamic limparCamposProjeto() {
+    final _$actionInfo = _$CadastroControllerBaseActionController.startAction(
+        name: 'CadastroControllerBase.limparCamposProjeto');
+    try {
+      return super.limparCamposProjeto();
+    } finally {
+      _$CadastroControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic limparCamposPessoa() {
+    final _$actionInfo = _$CadastroControllerBaseActionController.startAction(
+        name: 'CadastroControllerBase.limparCamposPessoa');
+    try {
+      return super.limparCamposPessoa();
+    } finally {
+      _$CadastroControllerBaseActionController.endAction(_$actionInfo);
+    }
   }
 
   @override
@@ -231,7 +299,9 @@ senha: ${senha},
 confirmaSenha: ${confirmaSenha},
 email: ${email},
 listProjetos: ${listProjetos},
-listPessoas: ${listPessoas}
+listPessoasResponsaveis: ${listPessoasResponsaveis},
+isLoading: ${isLoading},
+responsavelId: ${responsavelId}
     ''';
   }
 }

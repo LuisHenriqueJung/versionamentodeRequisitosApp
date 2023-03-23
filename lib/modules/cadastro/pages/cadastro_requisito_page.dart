@@ -1,162 +1,233 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+
 import 'package:versionamentorequisitos/Models/projeto.dart';
+import 'package:versionamentorequisitos/Models/requisito.dart';
+import 'package:versionamentorequisitos/db/db_conection.dart';
+import 'package:versionamentorequisitos/modules/cadastro/controller/cadastro_controller.dart';
 
+import '../../../Components/custom_textfield.dart';
+import '../../../Components/input_dropdowns.dart';
 import '../../../Components/sucess_dialog_widget.dart';
-
-const List<String> listProjeto = <String>[
-  'Selecione o projeto',
-  'Projeto 2',
-  ' Projeto 3',
-  ' Projeto 4'
-];
-const List<String> listPrioridade = <String>[
-  'Prioridade do requisito',
-  'Alta',
-  'Média',
-  'Baixa'
-];
-const List<String> complexidade = <String>[
-  'Complexidade do requisito',
-  'Alta',
-  'Média',
-  'Baixa'
-];
+import '../../../utils/validators/app_validator.dart';
 
 class CadastroRequisitoPage extends StatefulWidget {
-  const CadastroRequisitoPage({super.key});
+  final int projetoId;
+  const CadastroRequisitoPage({
+    Key? key,
+    required this.projetoId,
+  }) : super(key: key);
 
   @override
   State<CadastroRequisitoPage> createState() => _CadastroRequisitoPageState();
 }
 
 class _CadastroRequisitoPageState extends State<CadastroRequisitoPage> {
-  String dropdownProjetoValue = listProjeto.first;
-  String dropdownPrioridadeoValue = listPrioridade.first;
-  String dropdownComplexidadeValue = complexidade.first;
+  final cadastroController = Modular.get<CadastroController>();
+  String? dropDownTipoValue;
+  String? dropDownComplexidadeValue;
+  String? dropDownPrioridadeValue;
+  String? dropDownStatusValue;
+
+  cadastrarRequisito(int projetoId) async {
+    cadastroController.isLoading = true;
+    await cadastroController.cadastrarRequisito(projetoId);
+    cadastroController.isLoading = false;
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Cadastrar requisito'),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: [
-            Container(
-              width: MediaQuery.of(context).size.width * 0.95,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5),
-                  border: Border.all(
-                    color: Colors.black45,
-                  )),
-              child: DropdownButton(
-                  icon: Container(),
-                  underline: Container(),
-                  value: dropdownProjetoValue,
-                  items:
-                      listProjeto.map<DropdownMenuItem<String>>((String value) {
-                    return DropdownMenuItem<String>(
-                      value: value,
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 12, right: 28.0),
-                        child: Text(value),
-                      ),
-                    );
-                  }).toList(),
-                  onChanged: ((String? value) {
-                    setState(() {
-                      dropdownProjetoValue = value!;
-                    });
-                  })),
-            ),
-            const SizedBox(
-              height: 12,
-            ),
-            Container(
-              width: MediaQuery.of(context).size.width * 0.95,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5),
-                  border: Border.all(
-                    color: Colors.black45,
-                  )),
-              child: DropdownButton(
-                  icon: Container(),
-                  alignment: AlignmentDirectional.centerStart,
-                  underline: Container(),
-                  value: dropdownPrioridadeoValue,
-                  items: listPrioridade
-                      .map<DropdownMenuItem<String>>((String value) {
-                    return DropdownMenuItem<String>(
-                      value: value,
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 12, right: 28.0),
-                        child: Text(value),
-                      ),
-                    );
-                  }).toList(),
-                  onChanged: ((String? value) {
-                    setState(() {
-                      dropdownPrioridadeoValue = value!;
-                    });
-                  })),
-            ),
-            const SizedBox(
-              height: 12,
-            ),
-            Container(
-              width: MediaQuery.of(context).size.width * 0.95,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5),
-                  border: Border.all(
-                    color: Colors.black45,
-                  )),
-              child: DropdownButton(
-                  icon: Container(),
-                  alignment: AlignmentDirectional.centerStart,
-                  underline: Container(),
-                  value: dropdownComplexidadeValue,
-                  items: complexidade
-                      .map<DropdownMenuItem<String>>((String value) {
-                    return DropdownMenuItem<String>(
-                      value: value,
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 12, right: 28.0),
-                        child: Text(value),
-                      ),
-                    );
-                  }).toList(),
-                  onChanged: ((String? value) {
-                    setState(() {
-                      dropdownComplexidadeValue = value!;
-                    });
-                  })),
-            ),
-            const SizedBox(
-              height: 12,
-            ),
-            OutlinedButton(
-                onPressed: () {
-                  showDialog(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return const ShowSuccesDialog(projeto: false);
-                      });
-                  setState(() {
-                    dropdownProjetoValue = listProjeto.first;
-                    dropdownPrioridadeoValue = listPrioridade.first;
-                    dropdownComplexidadeValue = complexidade.first;
-                  });
-                },
-                child: const Text("Salvar")),
+        appBar: AppBar(
+          title: const Text('Cadastrar Requisito'),
+          actions: [
+            IconButton(
+                onPressed: () => cadastrarRequisito(widget.projetoId),
+                icon: Icon(Icons.save))
           ],
         ),
-      ),
-    );
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: (cadastroController.isLoading)
+                ? Center(
+                    child: CircularProgressIndicator(),
+                  )
+                : Form(
+                    key: cadastroController.formKeyRequisito,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        CustomTextField(
+                          validator: (valor) =>
+                              AppValidator().requiredValidator(valor),
+                          controller: cadastroController.descricao,
+                          hint: 'Descreva o requisito',
+                          label: 'Descrição',
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        DropdownButtonFormField<String>(
+                          decoration:
+                              MyInputDecoration('Prioridade').getDecoration(),
+                          hint: Text('Selecione a prioridade'),
+                          isDense: true,
+                          isExpanded: true,
+                          validator: (value) =>
+                              AppValidator().requiredValidatorDropDown(value),
+                          value: dropDownPrioridadeValue,
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          items: RequisitosFields.niveisValues
+                              .map<DropdownMenuItem<String>>((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(
+                                value,
+                                style: TextStyle(fontSize: 14),
+                              ),
+                            );
+                          }).toList(),
+                          onChanged: (String? newValue) {
+                            setState(() {
+                              dropDownPrioridadeValue = newValue!;
+                            });
+
+                            cadastroController.prioridade.text = newValue!;
+                          },
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        DropdownButtonFormField<String>(
+                          decoration:
+                              MyInputDecoration('Complexidade').getDecoration(),
+                          hint: Text('Selecione a complexidade'),
+                          isDense: true,
+                          isExpanded: true,
+                          validator: (value) =>
+                              AppValidator().requiredValidatorDropDown(value),
+                          value: dropDownComplexidadeValue,
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          items: RequisitosFields.niveisValues
+                              .map<DropdownMenuItem<String>>((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(
+                                value,
+                                style: TextStyle(fontSize: 14),
+                              ),
+                            );
+                          }).toList(),
+                          onChanged: (String? newValue) {
+                            setState(() {
+                              dropDownComplexidadeValue = newValue!;
+                            });
+
+                            cadastroController.complexidade.text = newValue!;
+                          },
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        DropdownButtonFormField<String>(
+                          decoration: MyInputDecoration('Tipo').getDecoration(),
+                          hint: Text('Selecione o tipo'),
+                          isDense: true,
+                          isExpanded: true,
+                          validator: (value) =>
+                              AppValidator().requiredValidatorDropDown(value),
+                          value: dropDownTipoValue,
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          items: RequisitosFields.tiposValues
+                              .map<DropdownMenuItem<String>>((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(
+                                value,
+                                style: TextStyle(fontSize: 14),
+                              ),
+                            );
+                          }).toList(),
+                          onChanged: (String? newValue) {
+                            setState(() {
+                              dropDownTipoValue = newValue!;
+                            });
+
+                            cadastroController.tipo.text = newValue!;
+                          },
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        CustomTextField(
+                          keyboardType: TextInputType.number,
+                          validator: (valor) =>
+                              AppValidator().requiredValidator(valor),
+                          controller: cadastroController.tempoEstimado,
+                          hint: 'Tempo estimado em dias',
+                          label: 'Tempo estimado',
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        DropdownButtonFormField<String>(
+                          decoration:
+                              MyInputDecoration('Status').getDecoration(),
+                          hint: Text('Selecione o status do requisito'),
+                          isDense: true,
+                          isExpanded: true,
+                          validator: (value) =>
+                              AppValidator().requiredValidatorDropDown(value),
+                          value: dropDownStatusValue,
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          items: RequisitosFields.statusValues
+                              .map<DropdownMenuItem<String>>((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(
+                                value,
+                                style: TextStyle(fontSize: 14),
+                              ),
+                            );
+                          }).toList(),
+                          onChanged: (String? newValue) {
+                            setState(() {
+                              dropDownStatusValue = newValue!;
+                            });
+
+                            cadastroController.status.text = newValue!;
+                          },
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            OutlinedButton(
+                                onPressed: () =>
+                                    cadastroController.limpaCamposRequisito(),
+                                child: Text('Limpar campos')),
+                            SizedBox(
+                              width: 20,
+                            ),
+                            OutlinedButton(
+                                onPressed: () =>
+                                    cadastrarRequisito(widget.projetoId),
+                                child: const Text("Cadastrar")),
+                          ],
+                        ),
+                      ],
+                    )),
+          ),
+        ));
   }
 }

@@ -8,6 +8,15 @@ import 'package:versionamentorequisitos/Models/Projeto.dart';
 import 'package:versionamentorequisitos/Models/pessoa.dart';
 
 class RequisitosFields {
+  static final List<String> niveisValues = ['Baixa', 'Média', 'Alta'];
+  static final List<String> tiposValues = ['Funcional', 'Não funcional'];
+  static final List<String> statusValues = [
+    'Não iniciado',
+    'Em andamento',
+    'Parado',
+    'Finalizado',
+  ];
+
   static final List<String> values = [
     id,
     descricao,
@@ -18,7 +27,6 @@ class RequisitosFields {
     dataCadastro,
     tempoEstimadoEmDias,
     projetoId,
-    responsavelId
   ];
 
   static const String tabelaRequisito = 'requisitos';
@@ -31,7 +39,6 @@ class RequisitosFields {
   static const String dataCadastro = 'data_cadastro';
   static const String tempoEstimadoEmDias = 'tempo_estimado_em_dias';
   static const String projetoId = 'projeto_id';
-  static const String responsavelId = 'responsavel_id';
 }
 
 class Requisito {
@@ -43,8 +50,8 @@ class Requisito {
   String tipo;
   DateTime dataCadastro;
   int tempoEstimadoEmDias;
-  Projeto projeto;
-  Pessoa responsavel;
+  int projeto;
+
   Requisito({
     this.id,
     required this.descricao,
@@ -55,7 +62,6 @@ class Requisito {
     required this.dataCadastro,
     required this.tempoEstimadoEmDias,
     required this.projeto,
-    required this.responsavel,
   });
 
   Requisito copyWith({
@@ -67,8 +73,7 @@ class Requisito {
     String? tipo,
     DateTime? dataCadastro,
     int? tempoEstimadoEmDias,
-    Projeto? projeto,
-    Pessoa? responsavel,
+    int? projeto,
   }) {
     return Requisito(
       id: id ?? this.id,
@@ -80,7 +85,6 @@ class Requisito {
       dataCadastro: dataCadastro ?? this.dataCadastro,
       tempoEstimadoEmDias: tempoEstimadoEmDias ?? this.tempoEstimadoEmDias,
       projeto: projeto ?? this.projeto,
-      responsavel: responsavel ?? this.responsavel,
     );
   }
 
@@ -92,10 +96,9 @@ class Requisito {
       RequisitosFields.prioridade: prioridade,
       RequisitosFields.complexidade: complexidade,
       RequisitosFields.tipo: tipo,
-      RequisitosFields.dataCadastro: dataCadastro.millisecondsSinceEpoch,
+      RequisitosFields.dataCadastro: dataCadastro.toIso8601String(),
       RequisitosFields.tempoEstimadoEmDias: tempoEstimadoEmDias,
-      RequisitosFields.projetoId: projeto.toMap(),
-      RequisitosFields.responsavelId: responsavel.toMap(),
+      RequisitosFields.projetoId: projeto,
     };
   }
 
@@ -109,13 +112,9 @@ class Requisito {
       prioridade: map[RequisitosFields.prioridade] as String,
       complexidade: map[RequisitosFields.complexidade] as String,
       tipo: map[RequisitosFields.tipo] as String,
-      dataCadastro: DateTime.fromMillisecondsSinceEpoch(
-          map[RequisitosFields.dataCadastro] as int),
-      tempoEstimadoEmDias: map[RequisitosFields.tempoEstimadoEmDias] as int,
-      projeto: Projeto.fromMap(
-          map[RequisitosFields.projetoId] as Map<String, dynamic>),
-      responsavel: Pessoa.fromMap(
-          map[RequisitosFields.responsavelId] as Map<String, dynamic>),
+      dataCadastro: DateTime.parse(map[RequisitosFields.dataCadastro]),
+      tempoEstimadoEmDias: int.parse(map[RequisitosFields.tempoEstimadoEmDias]),
+      projeto: map[RequisitosFields.projetoId],
     );
   }
 
@@ -126,7 +125,7 @@ class Requisito {
 
   @override
   String toString() {
-    return 'Requisito(id: $id, descricao: $descricao, status: $status, prioridade: $prioridade, complexidade: $complexidade, tipo: $tipo, dataCadastro: $dataCadastro, tempoEstimadoEmDias: $tempoEstimadoEmDias, projeto: $projeto, responsavel: $responsavel)';
+    return 'Requisito(id: $id, descricao: $descricao, status: $status, prioridade: $prioridade, complexidade: $complexidade, tipo: $tipo, dataCadastro: $dataCadastro, tempoEstimadoEmDias: $tempoEstimadoEmDias, projeto: $projeto)';
   }
 
   @override
@@ -141,8 +140,7 @@ class Requisito {
         other.tipo == tipo &&
         other.dataCadastro == dataCadastro &&
         other.tempoEstimadoEmDias == tempoEstimadoEmDias &&
-        other.projeto == projeto &&
-        other.responsavel == responsavel;
+        other.projeto == projeto;
   }
 
   @override
@@ -155,7 +153,6 @@ class Requisito {
         tipo.hashCode ^
         dataCadastro.hashCode ^
         tempoEstimadoEmDias.hashCode ^
-        projeto.hashCode ^
-        responsavel.hashCode;
+        projeto.hashCode;
   }
 }
