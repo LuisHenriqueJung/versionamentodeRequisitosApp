@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:versionamentorequisitos/Modules/Cadastro/CadastroModule.dart';
+
+import 'app_module.dart';
+import 'modules/cadastro/cadastro_module.dart';
 
 void main() {
-  return runApp(ModularApp(module: CadastroModule(), child: AppWidget()));
+  return runApp(ModularApp(module: AppModule(), child: AppWidget()));
 }
 
 class AppWidget extends StatelessWidget {

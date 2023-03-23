@@ -41,6 +41,10 @@ dependencies:
   mobx: ^2.1.4
   mobx_codegen: ^2.1.1
   flutter_mobx: ^2.0.6+5
+  sqflite: ^2.2.6
+  reactive_forms: ^14.2.0
+  email_validator: ^2.1.17
+  brasil_fields: ^1.11.0
 
 dev_dependencies:
   flutter_test:

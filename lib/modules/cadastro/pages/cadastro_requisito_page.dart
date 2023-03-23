@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:versionamentorequisitos/Models/Projeto.dart';
+import 'package:versionamentorequisitos/Models/projeto.dart';
 
-import '../../Components/sucess_dialog_widget.dart';
+import '../../../Components/sucess_dialog_widget.dart';
 
 const List<String> listProjeto = <String>[
   'Selecione o projeto',
