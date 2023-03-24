@@ -57,6 +57,39 @@ mixin _$CadastroController on CadastroControllerBase, Store {
     });
   }
 
+  late final _$listProjetosAtom =
+      Atom(name: 'CadastroControllerBase.listProjetos', context: context);
+
+  @override
+  ObservableList<Projeto> get listProjetos {
+    _$listProjetosAtom.reportRead();
+    return super.listProjetos;
+  }
+
+  @override
+  set listProjetos(ObservableList<Projeto> value) {
+    _$listProjetosAtom.reportWrite(value, super.listProjetos, () {
+      super.listProjetos = value;
+    });
+  }
+
+  late final _$listPessoasResponsaveisAtom = Atom(
+      name: 'CadastroControllerBase.listPessoasResponsaveis', context: context);
+
+  @override
+  ObservableList<Pessoa> get listPessoasResponsaveis {
+    _$listPessoasResponsaveisAtom.reportRead();
+    return super.listPessoasResponsaveis;
+  }
+
+  @override
+  set listPessoasResponsaveis(ObservableList<Pessoa> value) {
+    _$listPessoasResponsaveisAtom
+        .reportWrite(value, super.listPessoasResponsaveis, () {
+      super.listPessoasResponsaveis = value;
+    });
+  }
+
   late final _$nomePessoaAtom =
       Atom(name: 'CadastroControllerBase.nomePessoa', context: context);
 
@@ -169,36 +202,115 @@ mixin _$CadastroController on CadastroControllerBase, Store {
     });
   }
 
-  late final _$listProjetosAtom =
-      Atom(name: 'CadastroControllerBase.listProjetos', context: context);
+  late final _$descricaoAtom =
+      Atom(name: 'CadastroControllerBase.descricao', context: context);
 
   @override
-  ObservableList<Projeto> get listProjetos {
-    _$listProjetosAtom.reportRead();
-    return super.listProjetos;
+  TextEditingController get descricao {
+    _$descricaoAtom.reportRead();
+    return super.descricao;
   }
 
   @override
-  set listProjetos(ObservableList<Projeto> value) {
-    _$listProjetosAtom.reportWrite(value, super.listProjetos, () {
-      super.listProjetos = value;
+  set descricao(TextEditingController value) {
+    _$descricaoAtom.reportWrite(value, super.descricao, () {
+      super.descricao = value;
     });
   }
 
-  late final _$listPessoasResponsaveisAtom = Atom(
-      name: 'CadastroControllerBase.listPessoasResponsaveis', context: context);
+  late final _$prioridadeAtom =
+      Atom(name: 'CadastroControllerBase.prioridade', context: context);
 
   @override
-  ObservableList<Pessoa> get listPessoasResponsaveis {
-    _$listPessoasResponsaveisAtom.reportRead();
-    return super.listPessoasResponsaveis;
+  TextEditingController get prioridade {
+    _$prioridadeAtom.reportRead();
+    return super.prioridade;
   }
 
   @override
-  set listPessoasResponsaveis(ObservableList<Pessoa> value) {
-    _$listPessoasResponsaveisAtom
-        .reportWrite(value, super.listPessoasResponsaveis, () {
-      super.listPessoasResponsaveis = value;
+  set prioridade(TextEditingController value) {
+    _$prioridadeAtom.reportWrite(value, super.prioridade, () {
+      super.prioridade = value;
+    });
+  }
+
+  late final _$complexidadeAtom =
+      Atom(name: 'CadastroControllerBase.complexidade', context: context);
+
+  @override
+  TextEditingController get complexidade {
+    _$complexidadeAtom.reportRead();
+    return super.complexidade;
+  }
+
+  @override
+  set complexidade(TextEditingController value) {
+    _$complexidadeAtom.reportWrite(value, super.complexidade, () {
+      super.complexidade = value;
+    });
+  }
+
+  late final _$tipoAtom =
+      Atom(name: 'CadastroControllerBase.tipo', context: context);
+
+  @override
+  TextEditingController get tipo {
+    _$tipoAtom.reportRead();
+    return super.tipo;
+  }
+
+  @override
+  set tipo(TextEditingController value) {
+    _$tipoAtom.reportWrite(value, super.tipo, () {
+      super.tipo = value;
+    });
+  }
+
+  late final _$tempoEstimadoAtom =
+      Atom(name: 'CadastroControllerBase.tempoEstimado', context: context);
+
+  @override
+  TextEditingController get tempoEstimado {
+    _$tempoEstimadoAtom.reportRead();
+    return super.tempoEstimado;
+  }
+
+  @override
+  set tempoEstimado(TextEditingController value) {
+    _$tempoEstimadoAtom.reportWrite(value, super.tempoEstimado, () {
+      super.tempoEstimado = value;
+    });
+  }
+
+  late final _$statusAtom =
+      Atom(name: 'CadastroControllerBase.status', context: context);
+
+  @override
+  TextEditingController get status {
+    _$statusAtom.reportRead();
+    return super.status;
+  }
+
+  @override
+  set status(TextEditingController value) {
+    _$statusAtom.reportWrite(value, super.status, () {
+      super.status = value;
+    });
+  }
+
+  late final _$listRequisitosAtom =
+      Atom(name: 'CadastroControllerBase.listRequisitos', context: context);
+
+  @override
+  ObservableList<Requisito> get listRequisitos {
+    _$listRequisitosAtom.reportRead();
+    return super.listRequisitos;
+  }
+
+  @override
+  set listRequisitos(ObservableList<Requisito> value) {
+    _$listRequisitosAtom.reportWrite(value, super.listRequisitos, () {
+      super.listRequisitos = value;
     });
   }
 
@@ -234,6 +346,22 @@ mixin _$CadastroController on CadastroControllerBase, Store {
     });
   }
 
+  late final _$projetoIdAtom =
+      Atom(name: 'CadastroControllerBase.projetoId', context: context);
+
+  @override
+  int get projetoId {
+    _$projetoIdAtom.reportRead();
+    return super.projetoId;
+  }
+
+  @override
+  set projetoId(int value) {
+    _$projetoIdAtom.reportWrite(value, super.projetoId, () {
+      super.projetoId = value;
+    });
+  }
+
   late final _$cadastrarProjetoAsyncAction =
       AsyncAction('CadastroControllerBase.cadastrarProjeto', context: context);
 
@@ -258,6 +386,16 @@ mixin _$CadastroController on CadastroControllerBase, Store {
   @override
   Future<dynamic> cadastrarPessoa() {
     return _$cadastrarPessoaAsyncAction.run(() => super.cadastrarPessoa());
+  }
+
+  late final _$cadastrarRequisitoAsyncAction = AsyncAction(
+      'CadastroControllerBase.cadastrarRequisito',
+      context: context);
+
+  @override
+  Future<dynamic> cadastrarRequisito(int idProjeto) {
+    return _$cadastrarRequisitoAsyncAction
+        .run(() => super.cadastrarRequisito(idProjeto));
   }
 
   late final _$CadastroControllerBaseActionController =
@@ -286,11 +424,24 @@ mixin _$CadastroController on CadastroControllerBase, Store {
   }
 
   @override
+  dynamic limpaCamposRequisito() {
+    final _$actionInfo = _$CadastroControllerBaseActionController.startAction(
+        name: 'CadastroControllerBase.limpaCamposRequisito');
+    try {
+      return super.limpaCamposRequisito();
+    } finally {
+      _$CadastroControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 nomeController: ${nomeController},
 prazoEntrega: ${prazoEntrega},
 responsavel: ${responsavel},
+listProjetos: ${listProjetos},
+listPessoasResponsaveis: ${listPessoasResponsaveis},
 nomePessoa: ${nomePessoa},
 cpf: ${cpf},
 funcao: ${funcao},
@@ -298,10 +449,16 @@ login: ${login},
 senha: ${senha},
 confirmaSenha: ${confirmaSenha},
 email: ${email},
-listProjetos: ${listProjetos},
-listPessoasResponsaveis: ${listPessoasResponsaveis},
+descricao: ${descricao},
+prioridade: ${prioridade},
+complexidade: ${complexidade},
+tipo: ${tipo},
+tempoEstimado: ${tempoEstimado},
+status: ${status},
+listRequisitos: ${listRequisitos},
 isLoading: ${isLoading},
-responsavelId: ${responsavelId}
+responsavelId: ${responsavelId},
+projetoId: ${projetoId}
     ''';
   }
 }

@@ -5,6 +5,7 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:versionamentorequisitos/Components/drawer_menu.dart';
 import 'package:versionamentorequisitos/modules/listagem/controller/listagem_controller.dart';
 
 class ListagemPessoasPage extends StatefulWidget {
@@ -34,6 +35,7 @@ class _ListagemPessoasPageState extends State<ListagemPessoasPage> {
   Widget build(BuildContext context) {
     return Observer(builder: (context) {
       return Scaffold(
+          drawer: MyDrawerMenu(),
           floatingActionButton: FloatingActionButton(
             onPressed: () => Modular.to.pushNamed('/cadastro/pessoa'),
             child: Icon(Icons.add),

@@ -57,6 +57,38 @@ mixin _$ListagemController on ListagemControllerBase, Store {
     });
   }
 
+  late final _$isLoadingAtom =
+      Atom(name: 'ListagemControllerBase.isLoading', context: context);
+
+  @override
+  bool get isLoading {
+    _$isLoadingAtom.reportRead();
+    return super.isLoading;
+  }
+
+  @override
+  set isLoading(bool value) {
+    _$isLoadingAtom.reportWrite(value, super.isLoading, () {
+      super.isLoading = value;
+    });
+  }
+
+  late final _$projetoIdAtom =
+      Atom(name: 'ListagemControllerBase.projetoId', context: context);
+
+  @override
+  int get projetoId {
+    _$projetoIdAtom.reportRead();
+    return super.projetoId;
+  }
+
+  @override
+  set projetoId(int value) {
+    _$projetoIdAtom.reportWrite(value, super.projetoId, () {
+      super.projetoId = value;
+    });
+  }
+
   late final _$getPessoasAsyncAction =
       AsyncAction('ListagemControllerBase.getPessoas', context: context);
 
@@ -86,7 +118,9 @@ mixin _$ListagemController on ListagemControllerBase, Store {
     return '''
 listProjetos: ${listProjetos},
 listPessoas: ${listPessoas},
-listRequisitos: ${listRequisitos}
+listRequisitos: ${listRequisitos},
+isLoading: ${isLoading},
+projetoId: ${projetoId}
     ''';
   }
 }

@@ -11,12 +11,12 @@ class ListagemModule extends Module {
   @override
   List<ModularRoute> get routes => [
         ChildRoute(
-          '/pessoa',
-          child: (context, args) => const ListagemPessoasPage(),
-        ),
-        ChildRoute(
           '/',
           child: (context, args) => const ListagemProjetosPage(),
+        ),
+        ChildRoute(
+          '/pessoa',
+          child: (context, args) => const ListagemPessoasPage(),
         ),
         ChildRoute(
           '/requisito',

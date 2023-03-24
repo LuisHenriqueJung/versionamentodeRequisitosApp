@@ -95,7 +95,7 @@ abstract class CadastroControllerBase with Store {
       try {
         await DbConection.instance.insertProjeto(projeto);
         limparCamposProjeto();
-        Modular.to.popAndPushNamed('/listagem/');
+        Modular.to.popAndPushNamed('/');
         return true;
       } catch (e) {
         return false;
@@ -142,7 +142,7 @@ abstract class CadastroControllerBase with Store {
       try {
         await DbConection.instance.insertPessoa(pessoa);
         limparCamposPessoa();
-        Modular.to.pushNamed('/pessoa');
+        Modular.to.navigate('/pessoa');
         return true;
       } catch (e) {
         return false;
@@ -182,7 +182,7 @@ abstract class CadastroControllerBase with Store {
       try {
         await DbConection.instance.insertRequisito(requisito);
 
-        Modular.to.popAndPushNamed('/listagem/requisito', arguments: idProjeto);
+        Modular.to.popAndPushNamed('/requisito', arguments: idProjeto);
         return true;
       } catch (e) {
         return false;

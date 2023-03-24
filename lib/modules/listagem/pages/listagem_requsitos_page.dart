@@ -43,10 +43,11 @@ class ListagemRequisitosPageState extends State<ListagemRequisitosPage> {
     return Observer(builder: (context) {
       return Scaffold(
         floatingActionButton: FloatingActionButton(
-          child: Icon(Icons.add),
-          onPressed: () => Modular.to.popAndPushNamed('/cadastro/requisito',
-              arguments: widget.projetoId),
-        ),
+            child: Icon(Icons.add),
+            onPressed: () {
+              Modular.to.pushNamed('/cadastro/requisito',
+                  arguments: widget.projetoId);
+            }),
         appBar: AppBar(
           title: Text('Requisitos'),
         ),

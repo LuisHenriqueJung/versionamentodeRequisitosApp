@@ -15,72 +15,70 @@ class MyDrawerMenu extends StatelessWidget {
         child: Column(
           children: [
             Expanded(
-              child: Container(
-                child: ListView(
-                  children: [
-                    Container(
-                      padding: EdgeInsets.only(top: 10, bottom: 5),
-                      child: Center(
-                        child: Text(
-                          'Menu',
-                          style: TextStyle(
-                              fontSize: 16, fontWeight: FontWeight.bold),
-                        ),
+              child: ListView(
+                children: [
+                  Container(
+                    padding: EdgeInsets.only(top: 10, bottom: 5),
+                    child: Center(
+                      child: Text(
+                        'Menu',
+                        style: TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.bold),
                       ),
                     ),
-                    Divider(
-                      height: 2,
-                    ),
-                    ListTile(
-                      selectedTileColor: Colors.grey.shade300,
-                      selectedColor: Colors.black,
-                      leading: const Icon(Icons.list),
-                      onTap: () {
-                        Modular.to.navigate('/listagem/');
-                      },
-                      title: const Text('Listar projetos'),
-                    ),
-                    Divider(
-                      height: 2,
-                    ),
-                    ListTile(
-                      dense: true,
-                      selectedTileColor: Colors.grey.shade300,
-                      selectedColor: Colors.black,
-                      leading: const Icon(Icons.add),
-                      onTap: () {
-                        Modular.to.pushNamed('/cadastro/projeto');
-                      },
-                      title: const Text('Cadastrar Projeto'),
-                    ),
-                    Divider(
-                      height: 2,
-                    ),
-                    ListTile(
-                      dense: true,
-                      selectedTileColor: Colors.grey.shade300,
-                      selectedColor: Colors.black,
-                      leading: const Icon(Icons.list),
-                      onTap: () {
-                        Modular.to.pushNamed('/pessoa');
-                      },
-                      title: const Text('Listar pessoas'),
-                    ),
-                    Divider(
-                      height: 4,
-                    ),
-                    ListTile(
-                      dense: true,
-                      selectedTileColor: Colors.grey.shade300,
-                      selectedColor: Colors.black,
-                      leading: const Icon(Icons.add),
-                      onTap: () {
-                        Modular.to.pushNamed('/cadastro/pessoa');
-                      },
-                      title: const Text('Cadastrar Pessoa'),
-                    ),
-                  ],
-                ),
+                  ),
+                  Divider(
+                    height: 2,
+                  ),
+                  ListTile(
+                    selectedTileColor: Colors.grey.shade300,
+                    selectedColor: Colors.black,
+                    leading: const Icon(Icons.list),
+                    onTap: () {
+                      Modular.to.popAndPushNamed('/');
+                    },
+                    title: const Text('Listar projetos'),
+                  ),
+                  Divider(
+                    height: 2,
+                  ),
+                  ListTile(
+                    dense: true,
+                    selectedTileColor: Colors.grey.shade300,
+                    selectedColor: Colors.black,
+                    leading: const Icon(Icons.playlist_add_rounded),
+                    onTap: () {
+                      Modular.to.pushNamed('/cadastro/projeto');
+                    },
+                    title: const Text('Cadastrar Projeto'),
+                  ),
+                  Divider(
+                    height: 2,
+                  ),
+                  ListTile(
+                    dense: true,
+                    selectedTileColor: Colors.grey.shade300,
+                    selectedColor: Colors.black,
+                    leading: const Icon(Icons.groups_outlined),
+                    onTap: () {
+                      Modular.to.pushNamed('/pessoa');
+                    },
+                    title: const Text('Listar pessoas'),
+                  ),
+                  Divider(
+                    height: 4,
+                  ),
+                  ListTile(
+                    dense: true,
+                    selectedTileColor: Colors.grey.shade300,
+                    selectedColor: Colors.black,
+                    leading: const Icon(Icons.person_add_alt_1_outlined),
+                    onTap: () {
+                      Modular.to.pushNamed('/cadastro/pessoa');
+                    },
+                    title: const Text('Cadastrar Pessoa'),
+                  ),
+                ],
               ),
             ),
             Container(
