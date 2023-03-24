@@ -141,8 +141,10 @@ class DbConection {
 
   Future<List<Projeto>> readAllProjetos() async {
     final db = await instance.database;
-    final results = await db.query(ProjetoFields.tabelaProjeto,
-        orderBy: '${ProjetoFields.id} ASC');
+    //var results = await db.query(ProjetoFields.tabelaProjeto,
+    //    orderBy: '${ProjetoFields.id} ASC');
+    final results = await db.rawQuery(
+        'SELECT * FROM ${ProjetoFields.tabelaProjeto} INNER JOIN ${PessoaFields.tabelaPessoa} WHERE projetos.responsavel_id = pessoas._id');
 
     return results.map((json) => Projeto.fromMap(json)).toList();
   }

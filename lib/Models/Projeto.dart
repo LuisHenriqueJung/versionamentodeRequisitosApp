@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
 
 import 'package:versionamentorequisitos/Models/pessoa.dart';
+import 'package:versionamentorequisitos/db/db_conection.dart';
 
 class ProjetoFields {
   static final List<String> values = [
@@ -30,12 +31,14 @@ class Projeto {
   String prazoEntrega;
   DateTime dataInicio;
   int responsavelId;
+  Pessoa? responsavel;
   Projeto({
     this.id,
     required this.nome,
     required this.prazoEntrega,
     required this.dataInicio,
     required this.responsavelId,
+    this.responsavel,
   });
 
   Projeto copyWith({
@@ -71,6 +74,8 @@ class Projeto {
       prazoEntrega: map[ProjetoFields.prazoEntrega],
       dataInicio: DateTime.parse(map[ProjetoFields.dataInicio]),
       responsavelId: map[ProjetoFields.responsavelId],
+      responsavel:
+          map[ProjetoFields.responsavelId] != null ? Pessoa.fromMap(map) : null,
     );
   }
 

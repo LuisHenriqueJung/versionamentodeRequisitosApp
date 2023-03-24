@@ -51,20 +51,48 @@ class _ListagemProjetosPageState extends State<ListagemProjetosPage> {
                     )
                   : ListView.separated(
                       itemBuilder: (context, index) {
-                        return ListTile(
-                          dense: true,
-                          subtitle: Text(
-                              'Id responsavel: ${listagemController.listProjetos[index].responsavelId}'),
-                          trailing: Text(
-                              'Prazo: ${listagemController.listProjetos[index].prazoEntrega}'),
-                          onTap: () {
-                            Modular.to.pushNamed('/requisito',
-                                arguments:
-                                    listagemController.listProjetos[index].id);
-                          },
-                          title: Text(
-                            listagemController.listProjetos[index].nome,
-                            style: TextStyle(fontSize: 16),
+                        return Card(
+                          child: Column(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      listagemController
+                                          .listProjetos[index].nome,
+                                      style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    Text(
+                                        'Prazo: ${listagemController.listProjetos[index].prazoEntrega}'),
+                                  ],
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Row(
+                                  children: [
+                                    Text(
+                                        'Responsavel: ${listagemController.listProjetos[index].responsavel?.nome}'),
+                                  ],
+                                ),
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  TextButton(
+                                      onPressed: () => Modular.to.pushNamed(
+                                          '/requisito',
+                                          arguments: listagemController
+                                              .listProjetos[index].id),
+                                      child: Text('VER REQUISITOS'))
+                                ],
+                              ),
+                            ],
                           ),
                         );
                       },
