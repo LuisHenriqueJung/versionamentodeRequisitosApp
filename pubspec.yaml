@@ -46,6 +46,12 @@ dependencies:
   email_validator: ^2.1.17
   brasil_fields: ^1.11.0
   datetime_picker_formfield: ^2.0.1
+  camera_camera: ^2.0.2
+  image: ^4.0.15
+  path_provider: ^2.0.14
+  image_picker: ^0.8.5+3
+  geolocator: ^9.0.2
+  
 
 dev_dependencies:
   flutter_test:

@@ -90,6 +90,22 @@ mixin _$CadastroController on CadastroControllerBase, Store {
     });
   }
 
+  late final _$projetoEditAtom =
+      Atom(name: 'CadastroControllerBase.projetoEdit', context: context);
+
+  @override
+  Projeto get projetoEdit {
+    _$projetoEditAtom.reportRead();
+    return super.projetoEdit;
+  }
+
+  @override
+  set projetoEdit(Projeto value) {
+    _$projetoEditAtom.reportWrite(value, super.projetoEdit, () {
+      super.projetoEdit = value;
+    });
+  }
+
   late final _$nomePessoaAtom =
       Atom(name: 'CadastroControllerBase.nomePessoa', context: context);
 
@@ -314,6 +330,86 @@ mixin _$CadastroController on CadastroControllerBase, Store {
     });
   }
 
+  late final _$imagem1Atom =
+      Atom(name: 'CadastroControllerBase.imagem1', context: context);
+
+  @override
+  File get imagem1 {
+    _$imagem1Atom.reportRead();
+    return super.imagem1;
+  }
+
+  @override
+  set imagem1(File value) {
+    _$imagem1Atom.reportWrite(value, super.imagem1, () {
+      super.imagem1 = value;
+    });
+  }
+
+  late final _$imagem2Atom =
+      Atom(name: 'CadastroControllerBase.imagem2', context: context);
+
+  @override
+  File get imagem2 {
+    _$imagem2Atom.reportRead();
+    return super.imagem2;
+  }
+
+  @override
+  set imagem2(File value) {
+    _$imagem2Atom.reportWrite(value, super.imagem2, () {
+      super.imagem2 = value;
+    });
+  }
+
+  late final _$imagemPathAtom =
+      Atom(name: 'CadastroControllerBase.imagemPath', context: context);
+
+  @override
+  String get imagemPath {
+    _$imagemPathAtom.reportRead();
+    return super.imagemPath;
+  }
+
+  @override
+  set imagemPath(String value) {
+    _$imagemPathAtom.reportWrite(value, super.imagemPath, () {
+      super.imagemPath = value;
+    });
+  }
+
+  late final _$imagemPath2Atom =
+      Atom(name: 'CadastroControllerBase.imagemPath2', context: context);
+
+  @override
+  String get imagemPath2 {
+    _$imagemPath2Atom.reportRead();
+    return super.imagemPath2;
+  }
+
+  @override
+  set imagemPath2(String value) {
+    _$imagemPath2Atom.reportWrite(value, super.imagemPath2, () {
+      super.imagemPath2 = value;
+    });
+  }
+
+  late final _$requisitoEditAtom =
+      Atom(name: 'CadastroControllerBase.requisitoEdit', context: context);
+
+  @override
+  Requisito get requisitoEdit {
+    _$requisitoEditAtom.reportRead();
+    return super.requisitoEdit;
+  }
+
+  @override
+  set requisitoEdit(Requisito value) {
+    _$requisitoEditAtom.reportWrite(value, super.requisitoEdit, () {
+      super.requisitoEdit = value;
+    });
+  }
+
   late final _$isLoadingAtom =
       Atom(name: 'CadastroControllerBase.isLoading', context: context);
 
@@ -327,6 +423,22 @@ mixin _$CadastroController on CadastroControllerBase, Store {
   set isLoading(bool value) {
     _$isLoadingAtom.reportWrite(value, super.isLoading, () {
       super.isLoading = value;
+    });
+  }
+
+  late final _$isEditAtom =
+      Atom(name: 'CadastroControllerBase.isEdit', context: context);
+
+  @override
+  bool get isEdit {
+    _$isEditAtom.reportRead();
+    return super.isEdit;
+  }
+
+  @override
+  set isEdit(bool value) {
+    _$isEditAtom.reportWrite(value, super.isEdit, () {
+      super.isEdit = value;
     });
   }
 
@@ -370,6 +482,14 @@ mixin _$CadastroController on CadastroControllerBase, Store {
     return _$cadastrarProjetoAsyncAction.run(() => super.cadastrarProjeto());
   }
 
+  late final _$editarProjetoAsyncAction =
+      AsyncAction('CadastroControllerBase.editarProjeto', context: context);
+
+  @override
+  Future<dynamic> editarProjeto() {
+    return _$editarProjetoAsyncAction.run(() => super.editarProjeto());
+  }
+
   late final _$setPossiveisResponsaveisAsyncAction = AsyncAction(
       'CadastroControllerBase.setPossiveisResponsaveis',
       context: context);
@@ -388,6 +508,16 @@ mixin _$CadastroController on CadastroControllerBase, Store {
     return _$cadastrarPessoaAsyncAction.run(() => super.cadastrarPessoa());
   }
 
+  late final _$limpaCamposRequisitoAsyncAction = AsyncAction(
+      'CadastroControllerBase.limpaCamposRequisito',
+      context: context);
+
+  @override
+  Future limpaCamposRequisito() {
+    return _$limpaCamposRequisitoAsyncAction
+        .run(() => super.limpaCamposRequisito());
+  }
+
   late final _$cadastrarRequisitoAsyncAction = AsyncAction(
       'CadastroControllerBase.cadastrarRequisito',
       context: context);
@@ -396,6 +526,15 @@ mixin _$CadastroController on CadastroControllerBase, Store {
   Future<dynamic> cadastrarRequisito(int idProjeto) {
     return _$cadastrarRequisitoAsyncAction
         .run(() => super.cadastrarRequisito(idProjeto));
+  }
+
+  late final _$editarRequisitoAsyncAction =
+      AsyncAction('CadastroControllerBase.editarRequisito', context: context);
+
+  @override
+  Future<dynamic> editarRequisito(Requisito requisito) {
+    return _$editarRequisitoAsyncAction
+        .run(() => super.editarRequisito(requisito));
   }
 
   late final _$CadastroControllerBaseActionController =
@@ -424,17 +563,6 @@ mixin _$CadastroController on CadastroControllerBase, Store {
   }
 
   @override
-  dynamic limpaCamposRequisito() {
-    final _$actionInfo = _$CadastroControllerBaseActionController.startAction(
-        name: 'CadastroControllerBase.limpaCamposRequisito');
-    try {
-      return super.limpaCamposRequisito();
-    } finally {
-      _$CadastroControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
   String toString() {
     return '''
 nomeController: ${nomeController},
@@ -442,6 +570,7 @@ prazoEntrega: ${prazoEntrega},
 responsavel: ${responsavel},
 listProjetos: ${listProjetos},
 listPessoasResponsaveis: ${listPessoasResponsaveis},
+projetoEdit: ${projetoEdit},
 nomePessoa: ${nomePessoa},
 cpf: ${cpf},
 funcao: ${funcao},
@@ -456,7 +585,13 @@ tipo: ${tipo},
 tempoEstimado: ${tempoEstimado},
 status: ${status},
 listRequisitos: ${listRequisitos},
+imagem1: ${imagem1},
+imagem2: ${imagem2},
+imagemPath: ${imagemPath},
+imagemPath2: ${imagemPath2},
+requisitoEdit: ${requisitoEdit},
 isLoading: ${isLoading},
+isEdit: ${isEdit},
 responsavelId: ${responsavelId},
 projetoId: ${projetoId}
     ''';

@@ -16,7 +16,7 @@ class PessoaFields {
   ];
 
   static const String tabelaPessoa = 'pessoas';
-  static const String id = '_id';
+  static const String id = '_id_pessoa';
   static const String nome = 'nome_pessoa';
   static const String cpf = 'cpf';
   static const String funcao = 'funcao';

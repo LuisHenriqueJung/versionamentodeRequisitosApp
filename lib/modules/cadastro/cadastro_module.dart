@@ -11,13 +11,15 @@ import 'pages/cadastro_requisito_page.dart';
 
 class CadastroModule extends Module {
   @override
-  List<Bind> get binds => [Bind.singleton((i) => CadastroController())];
+  List<Bind> get binds => [];
 
   @override
   List<ModularRoute> get routes => [
         ChildRoute(
-          '/requisito',
-          child: (context, args) => CadastroRequisitoPage(projetoId: args.data),
+          '/requisito/',
+          child: (context, args) => CadastroRequisitoPage(
+            projetoId: args.data,
+          ),
         ),
         ChildRoute(
           '/projeto',

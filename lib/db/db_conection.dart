@@ -61,8 +61,10 @@ class DbConection {
     ${RequisitosFields.tipo} $textType,
     ${RequisitosFields.dataCadastro} $textType,
     ${RequisitosFields.tempoEstimadoEmDias} $textType,
-    ${RequisitosFields.projetoId} $numberType
-
+    ${RequisitosFields.coordenadas} $textType,
+    ${RequisitosFields.projetoId} $numberType,
+    ${RequisitosFields.imgUrl} $textType,
+    ${RequisitosFields.imgUrl2} $textType
     )''');
   }
 
@@ -144,7 +146,7 @@ class DbConection {
     //var results = await db.query(ProjetoFields.tabelaProjeto,
     //    orderBy: '${ProjetoFields.id} ASC');
     final results = await db.rawQuery(
-        'SELECT * FROM ${ProjetoFields.tabelaProjeto} INNER JOIN ${PessoaFields.tabelaPessoa} WHERE projetos.responsavel_id = pessoas._id');
+        'SELECT * FROM ${ProjetoFields.tabelaProjeto} INNER JOIN ${PessoaFields.tabelaPessoa} WHERE projetos.responsavel_id = pessoas.${PessoaFields.id}');
 
     return results.map((json) => Projeto.fromMap(json)).toList();
   }

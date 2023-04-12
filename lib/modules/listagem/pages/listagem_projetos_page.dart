@@ -5,6 +5,7 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:versionamentorequisitos/modules/cadastro/controller/cadastro_controller.dart';
 
 import '../../../Components/drawer_menu.dart';
 import '../controller/listagem_controller.dart';
@@ -19,6 +20,7 @@ class ListagemProjetosPage extends StatefulWidget {
 class _ListagemProjetosPageState extends State<ListagemProjetosPage> {
   bool isLoading = false;
   final listagemController = Modular.get<ListagemController>();
+  final cadastroController = Modular.get<CadastroController>();
 
   @override
   void initState() {
@@ -38,8 +40,12 @@ class _ListagemProjetosPageState extends State<ListagemProjetosPage> {
       return Scaffold(
           drawer: MyDrawerMenu(),
           floatingActionButton: FloatingActionButton(
-              child: Icon(Icons.add),
-              onPressed: () => Modular.to.popAndPushNamed('/cadastro/projeto')),
+            child: Icon(Icons.add),
+            onPressed: () {
+              cadastroController.isEdit = false;
+              Modular.to.popAndPushNamed('/cadastro/projeto');
+            },
+          ),
           appBar: AppBar(
             title: Text('Projetos'),
           ),
@@ -82,8 +88,22 @@ class _ListagemProjetosPageState extends State<ListagemProjetosPage> {
                                 ),
                               ),
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
+                                  TextButton.icon(
+                                    onPressed: () {
+                                      cadastroController.projetoEdit =
+                                          listagemController
+                                              .listProjetos[index];
+                                      cadastroController.isEdit = true;
+                                      Modular.to.pushNamed('/cadastro/projeto');
+                                    },
+                                    icon: Icon(
+                                      Icons.mode_edit,
+                                    ),
+                                    label: Text('Editar'),
+                                  ),
                                   TextButton(
                                       onPressed: () => Modular.to.pushNamed(
                                           '/requisito',

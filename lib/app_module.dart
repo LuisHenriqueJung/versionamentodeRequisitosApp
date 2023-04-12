@@ -5,11 +5,15 @@ import 'package:versionamentorequisitos/modules/home/home_module.dart';
 import 'package:versionamentorequisitos/modules/listagem/controller/listagem_controller.dart';
 
 import 'modules/cadastro/cadastro_module.dart';
+import 'modules/cadastro/controller/cadastro_controller.dart';
 import 'modules/listagem/listagem_module.dart';
 
 class AppModule extends Module {
   @override
-  List<Bind> get binds => [Bind.singleton((i) => ListagemController())];
+  List<Bind> get binds => [
+        Bind.singleton((i) => ListagemController()),
+        Bind.singleton((i) => CadastroController())
+      ];
 
   @override
   List<ModularRoute> get routes => [
