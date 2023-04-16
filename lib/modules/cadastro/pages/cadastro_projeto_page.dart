@@ -47,6 +47,8 @@ class _CadastroProjetoPageState extends State<CadastroProjetoPage> {
         cadastroController.projetoEdit.responsavel!.nome;
     cadastroController.prazoEntrega.text =
         cadastroController.projetoEdit.prazoEntrega;
+    cadastroController.linkDocumentacao.text =
+        cadastroController.projetoEdit.linkDocumentacao;
   }
 
   setResponsaveis() async {
@@ -189,6 +191,17 @@ class _CadastroProjetoPageState extends State<CadastroProjetoPage> {
                               },
                             );
                           }),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          CustomTextField(
+                            keyboardType: TextInputType.url,
+                            validator: (valor) =>
+                                AppValidator().requiredValidator(valor),
+                            controller: cadastroController.linkDocumentacao,
+                            hint: 'Insira o link da documentação',
+                            label: 'Link documentação',
+                          ),
                           SizedBox(
                             height: 20,
                           ),

@@ -57,6 +57,22 @@ mixin _$CadastroController on CadastroControllerBase, Store {
     });
   }
 
+  late final _$linkDocumentacaoAtom =
+      Atom(name: 'CadastroControllerBase.linkDocumentacao', context: context);
+
+  @override
+  TextEditingController get linkDocumentacao {
+    _$linkDocumentacaoAtom.reportRead();
+    return super.linkDocumentacao;
+  }
+
+  @override
+  set linkDocumentacao(TextEditingController value) {
+    _$linkDocumentacaoAtom.reportWrite(value, super.linkDocumentacao, () {
+      super.linkDocumentacao = value;
+    });
+  }
+
   late final _$listProjetosAtom =
       Atom(name: 'CadastroControllerBase.listProjetos', context: context);
 
@@ -215,6 +231,22 @@ mixin _$CadastroController on CadastroControllerBase, Store {
   set email(TextEditingController value) {
     _$emailAtom.reportWrite(value, super.email, () {
       super.email = value;
+    });
+  }
+
+  late final _$isLoginAtom =
+      Atom(name: 'CadastroControllerBase.isLogin', context: context);
+
+  @override
+  bool get isLogin {
+    _$isLoginAtom.reportRead();
+    return super.isLogin;
+  }
+
+  @override
+  set isLogin(bool value) {
+    _$isLoginAtom.reportWrite(value, super.isLogin, () {
+      super.isLogin = value;
     });
   }
 
@@ -568,6 +600,7 @@ mixin _$CadastroController on CadastroControllerBase, Store {
 nomeController: ${nomeController},
 prazoEntrega: ${prazoEntrega},
 responsavel: ${responsavel},
+linkDocumentacao: ${linkDocumentacao},
 listProjetos: ${listProjetos},
 listPessoasResponsaveis: ${listPessoasResponsaveis},
 projetoEdit: ${projetoEdit},
@@ -578,6 +611,7 @@ login: ${login},
 senha: ${senha},
 confirmaSenha: ${confirmaSenha},
 email: ${email},
+isLogin: ${isLogin},
 descricao: ${descricao},
 prioridade: ${prioridade},
 complexidade: ${complexidade},

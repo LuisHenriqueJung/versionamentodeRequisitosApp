@@ -23,6 +23,7 @@ class ProjetoFields {
   static const String prazoEntrega = 'prazo_entrega';
   static const String dataInicio = 'data_inicio';
   static const String responsavelId = 'responsavel_id';
+  static const String linkDocumentacao = 'link_documentacao';
 }
 
 class Projeto {
@@ -31,6 +32,7 @@ class Projeto {
   String prazoEntrega;
   DateTime dataInicio;
   int responsavelId;
+  String linkDocumentacao;
   Pessoa? responsavel;
   Projeto({
     this.id,
@@ -38,21 +40,23 @@ class Projeto {
     required this.prazoEntrega,
     required this.dataInicio,
     required this.responsavelId,
+    required this.linkDocumentacao,
     this.responsavel,
   });
 
-  Projeto copyWith({
-    int? id,
-    String? nome,
-    String? prazoEntrega,
-    DateTime? dataInicio,
-    int? responsavelId,
-  }) {
+  Projeto copyWith(
+      {int? id,
+      String? nome,
+      String? prazoEntrega,
+      DateTime? dataInicio,
+      int? responsavelId,
+      String? linkDocumentacao}) {
     return Projeto(
       id: id ?? this.id,
       nome: nome ?? this.nome,
       prazoEntrega: prazoEntrega ?? this.prazoEntrega,
       dataInicio: dataInicio ?? this.dataInicio,
+      linkDocumentacao: linkDocumentacao ?? this.linkDocumentacao,
       responsavelId: responsavelId ?? this.responsavelId,
     );
   }
@@ -63,6 +67,7 @@ class Projeto {
       ProjetoFields.nome: nome,
       ProjetoFields.prazoEntrega: prazoEntrega,
       ProjetoFields.dataInicio: dataInicio.toIso8601String(),
+      ProjetoFields.linkDocumentacao: linkDocumentacao,
       ProjetoFields.responsavelId: responsavelId,
     };
   }
@@ -73,6 +78,7 @@ class Projeto {
       nome: map[ProjetoFields.nome] as String,
       prazoEntrega: map[ProjetoFields.prazoEntrega],
       dataInicio: DateTime.parse(map[ProjetoFields.dataInicio]),
+      linkDocumentacao: map[ProjetoFields.linkDocumentacao],
       responsavelId: map[ProjetoFields.responsavelId],
       responsavel:
           map[ProjetoFields.responsavelId] != null ? Pessoa.fromMap(map) : null,
@@ -86,7 +92,7 @@ class Projeto {
 
   @override
   String toString() {
-    return 'Projeto(id: $id, nome: $nome, prazoEntrega: $prazoEntrega, dataInicio: $dataInicio, responsavel: $responsavelId)';
+    return 'Projeto(id: $id, nome: $nome, prazoEntrega: $prazoEntrega, dataInicio: $dataInicio, Link da documentação: $linkDocumentacao, responsavel: $responsavelId)';
   }
 
   @override

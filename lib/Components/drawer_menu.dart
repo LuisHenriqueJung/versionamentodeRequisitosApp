@@ -35,7 +35,7 @@ class MyDrawerMenu extends StatelessWidget {
                     selectedColor: Colors.black,
                     leading: const Icon(Icons.list),
                     onTap: () {
-                      Modular.to.popAndPushNamed('/');
+                      Modular.to.popAndPushNamed('/listagem');
                     },
                     title: const Text('Listar projetos'),
                   ),
@@ -91,14 +91,14 @@ class MyDrawerMenu extends StatelessWidget {
                     ),
                     ListTile(
                       onTap: () {
-                        Modular.to.popAndPushNamed('/');
+                        Modular.to.navigate('/');
                       },
                       dense: true,
                       leading: Icon(
                         Icons.exit_to_app,
                         color: Colors.black,
                       ),
-                      title: Text('Inicio'),
+                      title: Text('Sair'),
                     ),
                     Divider(
                       height: 2,

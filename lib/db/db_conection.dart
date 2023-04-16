@@ -49,6 +49,7 @@ class DbConection {
      ${ProjetoFields.nome} $textType,
      ${ProjetoFields.prazoEntrega} $textType,
      ${ProjetoFields.dataInicio} $textType,
+     ${ProjetoFields.linkDocumentacao} $textType,
      ${ProjetoFields.responsavelId} $numberType
     )''');
 

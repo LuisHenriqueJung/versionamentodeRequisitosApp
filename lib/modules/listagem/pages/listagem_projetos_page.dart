@@ -8,6 +8,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:versionamentorequisitos/modules/cadastro/controller/cadastro_controller.dart';
 
 import '../../../Components/drawer_menu.dart';
+import '../components/web_view.dart';
 import '../controller/listagem_controller.dart';
 
 class ListagemProjetosPage extends StatefulWidget {
@@ -73,17 +74,32 @@ class _ListagemProjetosPageState extends State<ListagemProjetosPage> {
                                           fontSize: 18,
                                           fontWeight: FontWeight.bold),
                                     ),
-                                    Text(
-                                        'Prazo: ${listagemController.listProjetos[index].prazoEntrega}'),
+                                    OutlinedButton(
+                                      onPressed: () {
+                                        showDialog(
+                                            context: context,
+                                            builder: (context) => MyWebView(
+                                                  linkDocumentacao:
+                                                      listagemController
+                                                          .listProjetos[index]
+                                                          .linkDocumentacao,
+                                                ));
+                                      },
+                                      child: Text('Ver documentação'),
+                                    ),
                                   ],
                                 ),
                               ),
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
                                         'Responsavel: ${listagemController.listProjetos[index].responsavel?.nome}'),
+                                    Text(
+                                        'Prazo: ${listagemController.listProjetos[index].prazoEntrega}'),
                                   ],
                                 ),
                               ),

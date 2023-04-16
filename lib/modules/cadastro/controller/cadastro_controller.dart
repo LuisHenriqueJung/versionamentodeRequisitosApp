@@ -24,15 +24,19 @@ abstract class CadastroControllerBase with Store {
   @observable
   TextEditingController responsavel = TextEditingController(text: "");
   @observable
+  TextEditingController linkDocumentacao = TextEditingController(text: "");
+  @observable
   ObservableList<Projeto> listProjetos = ObservableList<Projeto>();
   @observable
   ObservableList<Pessoa> listPessoasResponsaveis = ObservableList<Pessoa>();
+
   @observable
   Projeto projetoEdit = Projeto(
       nome: 'nome',
       prazoEntrega: 'prazoEntrega',
       dataInicio: DateTime.now(),
-      responsavelId: 0);
+      responsavelId: 0,
+      linkDocumentacao: '');
   //----PROJETO---//
   //----PESSOA---//
   @observable
@@ -49,6 +53,8 @@ abstract class CadastroControllerBase with Store {
   TextEditingController confirmaSenha = TextEditingController(text: "");
   @observable
   TextEditingController email = TextEditingController(text: "");
+  @observable
+  bool isLogin = false;
   //----PESSOA---//
   //----REQUISITO---//
   @observable
@@ -115,6 +121,7 @@ abstract class CadastroControllerBase with Store {
     nomeController.clear();
     prazoEntrega.clear();
     responsavel.clear();
+    linkDocumentacao.clear();
     responsavelId = 0;
     formKeyProjeto.currentState?.reset();
   }
@@ -126,11 +133,12 @@ abstract class CadastroControllerBase with Store {
           nome: nomeController.text,
           prazoEntrega: prazoEntrega.text,
           dataInicio: DateTime.now(),
+          linkDocumentacao: linkDocumentacao.text,
           responsavelId: responsavelId);
       try {
         await DbConection.instance.insertProjeto(projeto);
         limparCamposProjeto();
-        Modular.to.popAndPushNamed('/');
+        Modular.to.popAndPushNamed('/listagem');
         return true;
       } catch (e) {
         return false;
@@ -145,12 +153,13 @@ abstract class CadastroControllerBase with Store {
     if (formKeyProjeto.currentState?.validate() ?? false) {
       projetoEdit.nome = nomeController.text;
       projetoEdit.prazoEntrega = prazoEntrega.text;
+      projetoEdit.linkDocumentacao = linkDocumentacao.text;
 
       try {
         await DbConection.instance.updateProjeto(projetoEdit);
         isEdit = false;
         limparCamposProjeto();
-        Modular.to.popAndPushNamed('/');
+        Modular.to.popAndPushNamed('/listagem');
         return true;
       } catch (e) {
         return false;
@@ -197,7 +206,13 @@ abstract class CadastroControllerBase with Store {
       try {
         await DbConection.instance.insertPessoa(pessoa);
         limparCamposPessoa();
-        Modular.to.navigate('/pessoa');
+        if (isLogin) {
+          isLogin = false;
+          Modular.to.navigate('/');
+        } else {
+          Modular.to.navigate('/listagem/pessoa');
+        }
+
         return true;
       } catch (e) {
         return false;
@@ -251,7 +266,7 @@ abstract class CadastroControllerBase with Store {
         await limpaCamposRequisito();
 
         Modular.to.pop();
-        Modular.to.popAndPushNamed('/requisito', arguments: idProjeto);
+        Modular.to.popAndPushNamed('/listagem/requisito', arguments: idProjeto);
         return true;
       } catch (e) {
         return false;
@@ -285,7 +300,8 @@ abstract class CadastroControllerBase with Store {
         Fluttertoast.showToast(msg: 'Alterações salvas com sucesso!');
 
         Modular.to.pop();
-        Modular.to.popAndPushNamed('/requisito', arguments: requisito.projeto);
+        Modular.to.popAndPushNamed('/listagem/requisito',
+            arguments: requisito.projeto);
         return true;
       } catch (e) {
         return false;

@@ -6,7 +6,7 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
-class CustomTextField extends StatelessWidget {
+class CustomTextFieldLogin extends StatelessWidget {
   final controller;
   final hint;
   final onChanged;
@@ -17,7 +17,7 @@ class CustomTextField extends StatelessWidget {
   final List<TextInputFormatter>? inputFormatters;
   final String? Function(String?)? validator;
 
-  const CustomTextField({
+  const CustomTextFieldLogin({
     Key? key,
     required this.controller,
     this.initialValue,
@@ -53,7 +53,6 @@ class CustomTextField extends StatelessWidget {
             borderSide: BorderSide(color: Colors.blue.shade300)),
         border: const OutlineInputBorder(),
         hintText: hint,
-        label: Text(label),
         floatingLabelStyle:
             MaterialStateTextStyle.resolveWith((Set<MaterialState> states) {
           final Color color = states.contains(MaterialState.focused)

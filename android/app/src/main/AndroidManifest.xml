@@ -6,6 +6,7 @@
         android:label="versionamentorequisitos"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher"
+        android:networkSecurityConfig="@xml/network_security_config"
         android:requestLegacyExternalStorage="true">
         
         <activity

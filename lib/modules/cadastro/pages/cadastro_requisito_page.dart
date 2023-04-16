@@ -319,6 +319,13 @@ class _CadastroRequisitoPageState extends State<CadastroRequisitoPage> {
                           SizedBox(
                             height: 20,
                           ),
+                          (cadastroController.isEdit)
+                              ? Text(
+                                  'Coordenadas de cadastro: ${requisitoEdit.coordenadas}')
+                              : Container(),
+                          SizedBox(
+                            height: 20,
+                          ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: const [Text('Imagens')],

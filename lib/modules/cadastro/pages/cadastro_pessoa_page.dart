@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:flutter/services.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/material.dart';
@@ -72,6 +73,7 @@ class CadastroPessoaPage extends StatelessWidget {
                               height: 20,
                             ),
                             CustomTextField(
+                              keyboardType: TextInputType.number,
                               validator: (cpf) =>
                                   AppValidator().cpfValidator(cpf),
                               controller: cadastroController.cpf,
@@ -111,6 +113,7 @@ class CadastroPessoaPage extends StatelessWidget {
                           ],
                         ),
                         CustomTextField(
+                          keyboardType: TextInputType.emailAddress,
                           validator: (valor) =>
                               AppValidator().emailValidator(valor),
                           controller: cadastroController.email,
@@ -131,6 +134,7 @@ class CadastroPessoaPage extends StatelessWidget {
                           height: 20,
                         ),
                         CustomTextField(
+                          keyboardType: TextInputType.visiblePassword,
                           validator: (valor) =>
                               AppValidator().requiredValidator(valor),
                           controller: cadastroController.senha,
@@ -142,6 +146,7 @@ class CadastroPessoaPage extends StatelessWidget {
                           height: 20,
                         ),
                         CustomTextField(
+                          keyboardType: TextInputType.visiblePassword,
                           validator: (valor) => AppValidator().passwordConfirm(
                               valor, cadastroController.senha.text),
                           controller: cadastroController.confirmaSenha,
